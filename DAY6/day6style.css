@@ -1,0 +1,432 @@
+/* Google Font */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#070b1d;
+    color:#fff;
+    overflow-x:hidden;
+}
+
+/* Animated Background */
+
+.bg-animation{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    overflow:hidden;
+}
+
+.bg-animation span{
+    position:absolute;
+    display:block;
+    width:250px;
+    height:250px;
+    border-radius:50%;
+    filter:blur(120px);
+    opacity:.35;
+    animation:float 15s infinite alternate;
+}
+
+.bg-animation span:nth-child(1){
+    background:#00d4ff;
+    top:10%;
+    left:5%;
+}
+
+.bg-animation span:nth-child(2){
+    background:#7f5cff;
+    right:10%;
+    top:20%;
+}
+
+.bg-animation span:nth-child(3){
+    background:#00ffb7;
+    bottom:10%;
+    left:20%;
+}
+
+.bg-animation span:nth-child(4){
+    background:#ff3cac;
+    bottom:20%;
+    right:15%;
+}
+
+.bg-animation span:nth-child(5){
+    background:#00d4ff;
+    left:45%;
+    top:55%;
+}
+
+@keyframes float{
+
+from{
+transform:translateY(0) scale(1);
+}
+
+to{
+transform:translateY(-80px) scale(1.2);
+}
+
+}
+
+/* Glass Effect */
+
+.glass{
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,.15);
+    box-shadow:0 8px 30px rgba(0,0,0,.35);
+}
+
+/* Navbar */
+
+.navbar{
+    transition:.4s;
+}
+
+.nav-link{
+    color:white !important;
+    margin-left:18px;
+}
+
+.nav-link:hover{
+    color:#00d4ff !important;
+}
+
+/* Hero */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding-top:80px;
+}
+
+.hero h1{
+    font-size:58px;
+    font-weight:700;
+    line-height:1.2;
+}
+
+.hero span{
+    color:#00d4ff;
+}
+
+.hero p{
+    color:#d5d5d5;
+    margin-top:20px;
+    font-size:18px;
+}
+
+.hero-image{
+    width:420px;
+    animation:updown 3s infinite ease-in-out;
+}
+
+@keyframes updown{
+
+50%{
+transform:translateY(-15px);
+}
+
+}
+
+/* Search */
+
+.form-control,
+.form-select{
+    background:rgba(255,255,255,.08);
+    color:white;
+    border:none;
+}
+
+.form-control:focus,
+.form-select:focus{
+    box-shadow:0 0 20px #00d4ff;
+    background:rgba(255,255,255,.1);
+    color:white;
+}
+
+/* Cards */
+
+.product-card{
+
+background:rgba(255,255,255,.08);
+
+border-radius:20px;
+
+overflow:hidden;
+
+transition:.35s;
+
+height:100%;
+
+border:1px solid rgba(255,255,255,.15);
+
+backdrop-filter:blur(10px);
+
+}
+
+.product-card:hover{
+
+transform:translateY(-12px);
+
+box-shadow:0 0 30px #00d4ff;
+
+}
+
+.product-card img{
+
+height:220px;
+
+width:100%;
+
+object-fit:cover;
+
+}
+
+.product-content{
+
+padding:20px;
+
+}
+
+.product-title{
+
+font-size:20px;
+
+font-weight:600;
+
+margin-bottom:10px;
+
+}
+
+.price{
+
+font-size:24px;
+
+font-weight:bold;
+
+color:#00ffb7;
+
+}
+
+.rating{
+
+color:gold;
+
+}
+
+.discount{
+
+background:#ff3b5c;
+
+padding:6px 12px;
+
+border-radius:50px;
+
+font-size:13px;
+
+display:inline-block;
+
+margin-top:10px;
+
+}
+
+.btn-cart{
+
+width:100%;
+
+margin-top:18px;
+
+border:none;
+
+padding:12px;
+
+border-radius:10px;
+
+background:linear-gradient(90deg,#00d4ff,#00ffb7);
+
+font-weight:600;
+
+transition:.3s;
+
+}
+
+.btn-cart:hover{
+
+transform:scale(1.05);
+
+}
+
+.wishlist{
+
+position:absolute;
+
+top:12px;
+
+right:12px;
+
+background:white;
+
+width:42px;
+
+height:42px;
+
+border-radius:50%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:20px;
+
+color:red;
+
+cursor:pointer;
+
+}
+
+/* About */
+
+#about{
+
+margin-top:60px;
+
+}
+
+#about p{
+
+color:#d9d9d9;
+
+line-height:1.8;
+
+}
+
+/* Footer */
+
+footer{
+
+margin-top:60px;
+
+background:#050814;
+
+}
+
+footer h3{
+
+color:#00d4ff;
+
+font-weight:700;
+
+}
+
+footer p{
+
+color:#ccc;
+
+}
+
+.social i{
+
+font-size:28px;
+
+margin:12px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.social i:hover{
+
+color:#00d4ff;
+
+transform:translateY(-8px);
+
+}
+
+/* Loader */
+
+#loader{
+
+padding:100px;
+
+}
+
+/* Scroll Button */
+
+#topBtn{
+
+position:fixed;
+
+bottom:30px;
+
+right:30px;
+
+display:none;
+
+border:none;
+
+background:#00d4ff;
+
+color:white;
+
+width:55px;
+
+height:55px;
+
+border-radius:50%;
+
+font-size:24px;
+
+box-shadow:0 0 20px #00d4ff;
+
+cursor:pointer;
+
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.hero{
+
+text-align:center;
+
+}
+
+.hero h1{
+
+font-size:38px;
+
+}
+
+.hero-image{
+
+width:260px;
+
+margin-top:30px;
+
+}
+
+.product-card img{
+
+height:180px;
+
+}
+
+}
