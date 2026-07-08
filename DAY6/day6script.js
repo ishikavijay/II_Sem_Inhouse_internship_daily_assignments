@@ -1,47 +1,35 @@
-// ============================
-// NeoShop - Product API Script
-// ============================
-
-const productContainer = document.getElementById("productContainer");
+const houseContainer = document.getElementById("houseContainer");
 const loader = document.getElementById("loader");
-const errorBox = document.getElementById("error");
 const searchInput = document.getElementById("searchInput");
-const categoryFilter = document.getElementById("categoryFilter");
+const priceFilter = document.getElementById("priceFilter");
 const topBtn = document.getElementById("topBtn");
 
-let allProducts = [];
+let houses = [];
 
-// Fetch Products
-async function loadProducts() {
+// Load Houses
+async function loadHouses() {
 
     loader.style.display = "block";
-    errorBox.classList.add("d-none");
 
     try {
 
-        const response = await fetch("https://dummyjson.com/products");
+        const response = await fetch("houses.json");
 
-        if (!response.ok) {
-            throw new Error("API Error");
-        }
+        houses = await response.json();
 
-        const data = await response.json();
-
-        allProducts = data.products;
-
-        displayProducts(allProducts);
-
-        loadCategories(allProducts);
+        displayHouses(houses);
 
         loader.style.display = "none";
 
     }
 
-    catch (error) {
+    catch(error){
 
-        loader.style.display = "none";
-
-        errorBox.classList.remove("d-none");
+        loader.innerHTML = `
+        <h2 class="text-danger">
+        Failed to Load Houses
+        </h2>
+        `;
 
         console.log(error);
 
@@ -49,68 +37,73 @@ async function loadProducts() {
 
 }
 
-// Display Cards
+// Display Houses
 
-function displayProducts(products) {
+function displayHouses(data){
 
-    productContainer.innerHTML = "";
+    houseContainer.innerHTML="";
 
-    if (products.length === 0) {
+    if(data.length===0){
 
-        productContainer.innerHTML = `
-        <div class="col-12 text-center">
-            <h3>No Products Found</h3>
-        </div>
-        `;
+        houseContainer.innerHTML=`
 
-        return;
+<div class="col-12 text-center">
+
+<h2>No Houses Found</h2>
+
+</div>
+
+`;
+
+return;
+
     }
 
-    products.forEach(product => {
+    data.forEach(house=>{
 
-        productContainer.innerHTML += `
+houseContainer.innerHTML+=`
 
 <div class="col-lg-4 col-md-6">
 
-<div class="product-card position-relative">
+<div class="house-card">
 
-<div class="wishlist">
-❤
-</div>
+<div class="favorite">🤍</div>
 
-<img src="${product.thumbnail}" class="img-fluid">
+<img src="${house.image}">
 
-<div class="product-content">
+<div class="card-body">
 
-<h4 class="product-title">
-${product.title}
-</h4>
+<h4>${house.name}</h4>
 
-<p>
-${product.description.substring(0,80)}...
+<p class="city">
+
+📍 ${house.city}
+
 </p>
 
-<div class="d-flex justify-content-between align-items-center">
+<h3 class="price">
 
-<span class="price">
-$${product.price}
-</span>
+₹${house.price.toLocaleString()}/month
 
-<span class="rating">
-⭐ ${product.rating}
-</span>
+</h3>
 
-</div>
+<div class="features">
 
-<div class="discount">
+<span>🛏 ${house.bedrooms} Beds</span>
 
-${product.discountPercentage.toFixed(0)}% OFF
+<span>🚿 ${house.bathrooms} Bath</span>
 
 </div>
 
-<button class="btn-cart">
+<p>
 
-🛒 Add To Cart
+⭐ ${house.rating}
+
+</p>
+
+<button class="btn-rent">
+
+Book Visit
 
 </button>
 
@@ -124,113 +117,84 @@ ${product.discountPercentage.toFixed(0)}% OFF
 
     });
 
-    // Wishlist Toggle
+    // Favourite
 
-    document.querySelectorAll(".wishlist").forEach(btn => {
+document.querySelectorAll(".favorite").forEach(btn=>{
 
-        btn.addEventListener("click", function () {
+btn.onclick=function(){
 
-            if (this.innerHTML == "❤") {
-
-                this.innerHTML = "💖";
-
-            }
-
-            else {
-
-                this.innerHTML = "❤";
-
-            }
-
-        });
-
-    });
+this.innerHTML=this.innerHTML==="🤍"?"❤️":"🤍";
 
 }
 
-// Categories
-
-function loadCategories(products) {
-
-    const categories = [...new Set(products.map(item => item.category))];
-
-    categoryFilter.innerHTML = `<option value="all">All Categories</option>`;
-
-    categories.forEach(cat => {
-
-        categoryFilter.innerHTML += `
-
-<option value="${cat}">
-${cat}
-</option>
-
-`;
-
-    });
+});
 
 }
 
-// Search
+// Filter
 
-searchInput.addEventListener("keyup", filterProducts);
+function filterHouses(){
 
-// Category Filter
+const search=searchInput.value.toLowerCase();
 
-categoryFilter.addEventListener("change", filterProducts);
+const price=priceFilter.value;
 
-function filterProducts() {
+let filtered=houses.filter(house=>{
 
-    const text = searchInput.value.toLowerCase();
+const cityMatch=house.city.toLowerCase().includes(search);
 
-    const category = categoryFilter.value;
+let priceMatch=true;
 
-    const filtered = allProducts.filter(product => {
+if(price!="all"){
 
-        const matchesText =
-            product.title.toLowerCase().includes(text);
-
-        const matchesCategory =
-            category === "all" ||
-            product.category === category;
-
-        return matchesText && matchesCategory;
-
-    });
-
-    displayProducts(filtered);
+priceMatch=house.price<=parseInt(price);
 
 }
+
+return cityMatch && priceMatch;
+
+});
+
+displayHouses(filtered);
+
+}
+
+// Live Search
+
+searchInput.addEventListener("keyup",filterHouses);
+
+priceFilter.addEventListener("change",filterHouses);
 
 // Scroll Button
 
-window.onscroll = function () {
+window.onscroll=function(){
 
-    if (document.documentElement.scrollTop > 300) {
+if(document.documentElement.scrollTop>250){
 
-        topBtn.style.display = "block";
+topBtn.style.display="block";
 
-    }
+}
 
-    else {
+else{
 
-        topBtn.style.display = "none";
+topBtn.style.display="none";
 
-    }
+}
 
-};
+}
 
-topBtn.onclick = function () {
+topBtn.onclick=function(){
 
-    window.scrollTo({
+window.scrollTo({
 
-        top: 0,
+top:0,
 
-        behavior: "smooth"
+behavior:"smooth"
 
-    });
+});
 
-};
+}
 
-// Initialize
+// Start
 
-loadProducts();
+loadHouses();

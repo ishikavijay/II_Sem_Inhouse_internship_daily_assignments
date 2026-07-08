@@ -3,38 +3,29 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>NeoShop | Smart Product Explorer</title>
+<title>DreamNest | Find Your Perfect Home</title>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap -->
 
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+<!-- Bootstrap Icons -->
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="day6style.css">
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<!-- Google Font -->
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="day6style.css">
 
 </head>
 
 <body>
-
-<!-- Animated Background -->
-
-<div class="bg-animation">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-</div>
 
 <!-- Navbar -->
 
@@ -42,12 +33,11 @@
 
 <div class="container">
 
-<a class="navbar-brand fw-bold fs-3 text-info" href="#">
-<i class="bi bi-gem"></i> NeoShop
+<a class="navbar-brand fw-bold fs-3 text-warning" href="#">
+🏠 DreamNest
 </a>
 
 <button class="navbar-toggler"
-type="button"
 data-bs-toggle="collapse"
 data-bs-target="#menu">
 
@@ -61,11 +51,11 @@ id="menu">
 <ul class="navbar-nav ms-auto">
 
 <li class="nav-item">
-<a class="nav-link active" href="#">Home</a>
+<a class="nav-link" href="#">Home</a>
 </li>
 
 <li class="nav-item">
-<a class="nav-link" href="#products">Products</a>
+<a class="nav-link" href="#properties">Properties</a>
 </li>
 
 <li class="nav-item">
@@ -95,21 +85,25 @@ id="menu">
 <div class="col-lg-6">
 
 <h1>
-Discover Amazing
-<span>Products</span>
-with Live API
+
+Find Your
+
+<span>Dream Home</span>
+
+Today
+
 </h1>
 
 <p>
 
-Explore hundreds of premium products using a real API with modern UI, filtering, searching and responsive cards.
+Discover premium apartments, villas and houses available for rent at affordable prices.
 
 </p>
 
-<a href="#products"
-class="btn btn-info btn-lg mt-3">
+<a href="#properties"
+class="btn btn-warning btn-lg">
 
-Explore Now
+Browse Homes
 
 </a>
 
@@ -117,8 +111,9 @@ Explore Now
 
 <div class="col-lg-6 text-center">
 
-<img src="https://cdn-icons-png.flaticon.com/512/3081/3081985.png"
-class="hero-image img-fluid">
+<img
+src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=700"
+class="img-fluid hero-img rounded-4 shadow">
 
 </div>
 
@@ -132,29 +127,47 @@ class="hero-image img-fluid">
 
 <section class="container py-5">
 
-<div class="row">
+<div class="row g-3">
 
-<div class="col-md-8">
+<div class="col-md-5">
 
 <input
 type="text"
 id="searchInput"
 class="form-control form-control-lg"
-placeholder="Search products...">
+placeholder="Search by city...">
 
 </div>
 
 <div class="col-md-4">
 
 <select
-id="categoryFilter"
+id="priceFilter"
 class="form-select form-select-lg">
 
-<option value="all">
-All Categories
-</option>
+<option value="all">All Rent</option>
+
+<option value="10000">Below ₹10,000</option>
+
+<option value="20000">Below ₹20,000</option>
+
+<option value="30000">Below ₹30,000</option>
+
+<option value="50000">Luxury Homes</option>
 
 </select>
+
+</div>
+
+<div class="col-md-3">
+
+<button
+class="btn btn-warning w-100 btn-lg"
+onclick="filterHouses()">
+
+Search
+
+</button>
 
 </div>
 
@@ -162,54 +175,80 @@ All Categories
 
 </section>
 
-<!-- Loading -->
+<!-- Featured -->
+
+<section class="container mb-5">
+
+<div class="glass p-4 rounded-4">
+
+<div class="row text-center">
+
+<div class="col-md-3">
+
+<h2>250+</h2>
+
+<p>Properties</p>
+
+</div>
+
+<div class="col-md-3">
+
+<h2>35+</h2>
+
+<p>Cities</p>
+
+</div>
+
+<div class="col-md-3">
+
+<h2>180+</h2>
+
+<p>Happy Families</p>
+
+</div>
+
+<div class="col-md-3">
+
+<h2>24/7</h2>
+
+<p>Support</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Loader -->
 
 <div
 id="loader"
 class="text-center my-5">
 
-<div class="spinner-border text-info"
+<div class="spinner-border text-warning"
 style="width:70px;height:70px;">
 
 </div>
 
-<h5 class="mt-3 text-light">
-Loading Products...
-</h5>
+<h4 class="mt-3">
+
+Loading Homes...
+
+</h4>
 
 </div>
 
-<!-- Error -->
-
-<div
-id="error"
-class="container text-center d-none">
-
-<h3 class="text-danger">
-
-Something Went Wrong!
-
-</h3>
-
-<button
-class="btn btn-danger mt-3"
-onclick="loadProducts()">
-
-Try Again
-
-</button>
-
-</div>
-
-<!-- Products -->
+<!-- Properties -->
 
 <section
-id="products"
+id="properties"
 class="container py-5">
 
 <div
 class="row g-4"
-id="productContainer">
+id="houseContainer">
 
 </div>
 
@@ -223,17 +262,45 @@ class="container py-5">
 
 <div class="glass p-5 rounded-4">
 
-<h2 class="text-info">
+<h2 class="text-warning">
 
-About NeoShop
+Why Choose DreamNest?
 
 </h2>
 
 <p>
 
-NeoShop is an advanced API-powered product explorer built using HTML, CSS, Bootstrap and JavaScript. Products are fetched dynamically from a live API with search, filters, beautiful animations and responsive design.
+DreamNest helps you discover verified rental homes with modern amenities, transparent pricing and trusted property owners.
 
 </p>
+
+<div class="row mt-4">
+
+<div class="col-md-4">
+
+<h5>🏡 Verified Listings</h5>
+
+<p>Only trusted properties.</p>
+
+</div>
+
+<div class="col-md-4">
+
+<h5>💰 Best Prices</h5>
+
+<p>Affordable monthly rent.</p>
+
+</div>
+
+<div class="col-md-4">
+
+<h5>📞 Instant Support</h5>
+
+<p>Available anytime.</p>
+
+</div>
+
+</div>
 
 </div>
 
@@ -247,15 +314,15 @@ class="py-5">
 
 <div class="container text-center">
 
-<h3>
+<h2>
 
-NeoShop
+DreamNest
 
-</h3>
+</h2>
 
 <p>
 
-Built using Bootstrap + JavaScript + DummyJSON API
+Find the perfect rental property with ease.
 
 </p>
 
@@ -265,7 +332,7 @@ Built using Bootstrap + JavaScript + DummyJSON API
 
 <i class="bi bi-instagram"></i>
 
-<i class="bi bi-github"></i>
+<i class="bi bi-twitter-x"></i>
 
 <i class="bi bi-linkedin"></i>
 
@@ -273,15 +340,13 @@ Built using Bootstrap + JavaScript + DummyJSON API
 
 <p class="mt-4">
 
-© 2026 NeoShop. All Rights Reserved.
+© 2026 DreamNest | All Rights Reserved
 
 </p>
 
 </div>
 
 </footer>
-
-<!-- Scroll Top -->
 
 <button
 id="topBtn">
@@ -290,11 +355,7 @@ id="topBtn">
 
 </button>
 
-<!-- Bootstrap -->
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- JavaScript -->
 
 <script src="day6script.js"></script>
 

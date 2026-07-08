@@ -98,7 +98,7 @@ font-weight:bold;
 </head>
 <body>
 
-<h1>🛍 Product Store (PHP API)</h1>
+<h1> Product Store </h1>
 
 <div class="container">
 
